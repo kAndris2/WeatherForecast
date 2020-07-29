@@ -55,8 +55,9 @@ import Chart from './Chart';
       render () {
         if(!this.state.loaded || !this.state.newData[0]){
           return(
-            <div>
-                tőt...
+            <div className="container text-center align-middle">
+              <video playsinline="" muted="" autoplay="true" loop="true" data-silent="true" src="https://cdn.dribbble.com/users/107759/screenshots/2436386/copper-loader.gif?vid=1"></video>
+              <div className="h1">Tőtök</div>
             </div>
           );
         }

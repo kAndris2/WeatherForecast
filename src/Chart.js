@@ -76,7 +76,7 @@ class Chart extends Component {
         
         const options = {
             animationEnabled: true,
-            theme: "light2",
+            theme: "dark",
 			title:{
 				text: "Weather Temperature Forecast"
 			},
