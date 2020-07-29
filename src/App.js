@@ -22,7 +22,7 @@ import Chart from './Chart';
         'contentType=json&'+
         'unitGroup=metric&'+
         'locationMode=single&'+
-        'key=VGI4KGKVXS1W2461TTPDAZ1CK&'+ //VGI4KGKVXS1W2461TTPDAZ1CK || X1T4HSVB1SFR2JDVHVUML7T5S
+        'key=X1T4HSVB1SFR2JDVHVUML7T5S&'+ //VGI4KGKVXS1W2461TTPDAZ1CK || X1T4HSVB1SFR2JDVHVUML7T5S
         'locations='+city+'%20';
         fetch(url)
         .then(res => res.json())
