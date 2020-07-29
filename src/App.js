@@ -66,6 +66,7 @@ import Chart from './Chart';
             <List 
               weather={this.state.newData[this.state.activePage - 1]} 
               location={this.state.weather.location.address}
+              data={this.state.weather}
               perPage={this.state.perPage}
               activePage={this.state.activePage}
             />
