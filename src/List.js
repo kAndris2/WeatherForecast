@@ -27,6 +27,11 @@ const Table = ({ weather,location,data }) => {
                 <img alt="rain" src="rainy.jpg" width="100" height="100"/>
             );
         }
+        else {
+            return (
+                <img src="no-data.png" width="100" height="100" />
+            );
+        }
     }
 
     return ( 
