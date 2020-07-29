@@ -7,22 +7,22 @@ const Table = ({ weather,location,data }) => {
 
 
     function setWeatherIcon(icon) {
-        if (icon.length == 1 && icon[0] == "clear") {
+        if (icon.length == 1 && icon[0].toLowerCase() == "clear") {
             return (
                 <img src="sunny.jpg" width="100" height="100" />
             );
         }
-        else if (icon.length == 1 && icon[0] == "overcast") {
+        else if (icon.length == 1 && icon[0].toLowerCase() == "overcast") {
             return (
                 <img src="cloudy.jpg" width="100" height="100" />
             );
         }
-        else if (icon.length == 1 && icon[0] == "partially cloudy") {
+        else if (icon.length == 1 && icon[0].toLowerCase() == "partially cloudy") {
             return (
                 <img src="sun-shower.jpg" width="100" height="100" />
             );
         }
-        else if (icon.length == 1 && icon[0] == "rain" || icon.length > 1 && icon.includes("rain")) {
+        else if (icon.length == 1 && icon[0].toLowerCase() == "rain" || icon.length > 1 && icon.includes("Rain")) {
             return (
                 <img src="rainy.jpg" width="100" height="100"/>
             );
@@ -104,6 +104,10 @@ const Table = ({ weather,location,data }) => {
                                     <div className="card" key={test.datetime}>
                                         <div className="card-header text-center">
                                             {moment(test.datetimeStr).format("YYYY.MM.DD H:mm")}
+                                        </div>
+
+                                        <div className="">
+                                            {setWeatherIcon(test.conditions.split(','))}
                                         </div>
 
                                         <div className="">
