@@ -12,7 +12,7 @@ import Chart from './Chart';
         activePage: 1,
         newData: [],
         offset: 0,
-        perPage: 10
+        perPage: 7
       }
 
       getData(city){
@@ -56,7 +56,7 @@ import Chart from './Chart';
         if(!this.state.loaded || !this.state.newData[0]){
           return(
             <div className="container text-center align-middle">
-              <video playsinline="" muted="" autoplay="true" loop="true" data-silent="true" src="https://cdn.dribbble.com/users/107759/screenshots/2436386/copper-loader.gif?vid=1"></video>
+              <video playsInline="" muted="" autoPlay={true} loop={true} data-silent="true" src="https://cdn.dribbble.com/users/107759/screenshots/2436386/copper-loader.gif?vid=1"></video>
               <div className="h1">Tőtök</div>
             </div>
           );

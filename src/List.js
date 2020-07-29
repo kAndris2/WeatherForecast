@@ -30,7 +30,7 @@ const Table = ({ weather,location,data }) => {
     }
 
     return ( 
-        // <table id="tablePreview" classNameName="table table-hover table-striped">
+        // <table id="tablePreview" classNameNameName="table table-hover table-striped">
         //     <thead>
         //         <tr>
         //             {headers.map(header => 
@@ -47,62 +47,61 @@ const Table = ({ weather,location,data }) => {
         //         )}
         //     </tbody>
         // </table>
+        <>
+        <h1>{location}</h1>
+
+        <div className="container row">
+
+            <div className="col-auto">
+                <img src="sunrise.jpg" width="50" height="50" />
+                {moment(data.location.currentConditions.sunrise).format("h:mm")}
+            </div>
+
+            <div className="col">
+                <img src="sunset.jpg" width="50" height="50" />
+                {moment(data.location.currentConditions.sunset).format("h:mm")}
+            </div>
+
+        </div>
+
+        <h4>Current conditions: {moment(data.location.currentConditions.datetime).format("YYYY.MM.DD H:mm")}</h4>
+
         <table className="table table-hover">
-            <tbody>
-                <h1>{location}</h1>
+            <tbody>   
+                <tr>
+                    <td>
+                        <div>
+                            <img src="temp.jpg" width="30" height="30" />
+                            {data.location.currentConditions.temp}
+                            °C
+                        </div>
+                        
+                        <div>
+                            <img src="wind.jpg" width="30" height="30" />
+                            {data.location.currentConditions.wspd}
+                            km/h
+                        </div>
 
-                <div class="container row">
+                        <div>
+                            <img src="humidity.jpg" width="30" height="30" />
+                            {data.location.currentConditions.humidity}
+                        </div>
+                    </td>
 
-                    <div class="col-auto">
-                        <img src="sunrise.jpg" width="50" height="50" />
-                        {moment(data.location.currentConditions.sunrise).format("h:mm")}
-                    </div>
-
-                    <div class="col">
-                        <img src="sunset.jpg" width="50" height="50" />
-                        {moment(data.location.currentConditions.sunset).format("h:mm")}
-                    </div>
-
-                </div>
-
-                <h4>Current conditions: {moment(data.location.currentConditions.datetime).format("YYYY.MM.DD H:mm")}</h4>
-
-                <table>
-                    <tr>
-                        <td>
-                            <div>
-                                <img src="temp.jpg" width="30" height="30" />
-                                {data.location.currentConditions.temp}
-                                °C
-                            </div>
-                            
-                            <div>
-                                <img src="wind.jpg" width="30" height="30" />
-                                {data.location.currentConditions.wspd}
-                                km/h
-                            </div>
-
-                            <div>
-                                <img src="humidity.jpg" width="30" height="30" />
-                                {data.location.currentConditions.humidity}
-                            </div>
-                        </td>
-
-                        <td>
-                            <div>
-                                {setWeatherIcon(data.location.currentConditions.icon.split(','))}
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-
+                    <td>
+                        <div>
+                            {setWeatherIcon(data.location.currentConditions.icon.split(','))}
+                        </div>
+                    </td>
+                </tr>
+                    
                 <tr>
                     <td>
                         <div className="card-deck">
                             {
                                 weather.map(test =>
                                     
-                                    <div className="card">
+                                    <div className="card" key={test.datetime}>
                                         <div className="card-header text-center">
                                             {moment(test.datetimeStr).format("YYYY.MM.DD H:mm")}
                                         </div>
@@ -131,6 +130,7 @@ const Table = ({ weather,location,data }) => {
                 </tr>
             </tbody>
         </table>
+        </>
     );
   };
 
