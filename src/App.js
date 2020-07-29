@@ -4,16 +4,24 @@ import Pagination from "react-js-pagination";
 import Chart from './Chart';
 
     class App extends Component {
-      state = {
-        loaded: false,
-        city: "Eger",
-        weather: [],
-        headers: ['Dátum','Kedd','Szerda','Csütörtök','Péntek','Szombat','Vasárnap'],
-        activePage: 1,
-        newData: [],
-        offset: 0,
-        perPage: 7
+      constructor(props){
+        super(props);
+        this.state = {
+          loaded: false,
+          city: "Eger",
+          weather: [],
+          activePage: 1,
+          newData: [],
+          offset: 0,
+          perPage: 7,
+          value:''
+        };
+        this.addValue = this.addValue.bind(this);
+        this.updateInput = this.updateInput.bind(this);
       }
+      // state = {
+        
+      // }
 
       getData(city){
         let url = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?'+
@@ -22,7 +30,7 @@ import Chart from './Chart';
         'contentType=json&'+
         'unitGroup=metric&'+
         'locationMode=single&'+
-        'key=X1T4HSVB1SFR2JDVHVUML7T5S&'+ //VGI4KGKVXS1W2461TTPDAZ1CK || X1T4HSVB1SFR2JDVHVUML7T5S
+        'key=W7I3NYLYSXA2JVB4I7ZZ8UJ41&'+ //VGI4KGKVXS1W2461TTPDAZ1CK || X1T4HSVB1SFR2JDVHVUML7T5S || W7I3NYLYSXA2JVB4I7ZZ8UJ41
         'locations='+city+'%20';
         fetch(url)
         .then(res => res.json())
@@ -42,6 +50,18 @@ import Chart from './Chart';
         }
     
         this.handlePageChange(1);
+      }
+
+      addValue(evt){
+        evt.preventDefault();
+        if (this.state.value !=undefined){
+          let new_city = this.state.value;
+          this.getData(new_city);
+        }
+      }
+    
+      updateInput(evt){
+        this.state={value: evt.target.value};   
       }
 
       componentDidMount() {
@@ -65,6 +85,10 @@ import Chart from './Chart';
         return (
           <>
             <div className="container">
+            <form onSubmit={this.addValue}>
+              <input type="text" onChange={this.updateInput} /><br/><br/>
+              <input type="submit" value="submit"/>
+            </form>
               <List 
                 weather={this.state.newData[this.state.activePage - 1]} 
                 location={this.state.weather.location.address}
