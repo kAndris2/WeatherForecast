@@ -12,7 +12,7 @@ import Chart from './Chart';
         activePage: 1,
         newData: [],
         offset: 0,
-        perPage: 10
+        perPage: 7
       }
 
       getData(city){
