@@ -77,19 +77,19 @@ const Table = ({ weather,location,data }) => {
                         <td>
                             <div>
                                 <img src="temp.jpg" width="30" height="30" />
-                                {data.location.currentConditions.temp}
+                                {data.location.currentConditions.temp == null ? "N/A" : data.location.currentConditions.temp}
                                 °C
                             </div>
                             
                             <div>
                                 <img src="wind.jpg" width="30" height="30" />
-                                {data.location.currentConditions.wspd}
+                                {data.location.currentConditions.wspd == null ? "N/A" : data.location.currentConditions.wspd}
                                 km/h
                             </div>
 
                             <div>
                                 <img src="humidity.jpg" width="30" height="30" />
-                                {data.location.currentConditions.humidity}
+                                {data.location.currentConditions.humidity == null ? "N/A" : data.location.currentConditions.humidity}
                             </div>
                         </td>
 
@@ -118,19 +118,19 @@ const Table = ({ weather,location,data }) => {
 
                                         <div className="">
                                             <img src="temp.jpg" width="30" height="30" />
-                                            {test.temp}
+                                            {test.temp == null ? "N/A" : test.temp}
                                             °C
                                         </div>
 
                                         <div className="">
                                             <img src="wind.jpg" width="30" height="30" />
-                                            {test.wspd}
+                                            {test.wspd == null ? "N/A" : test.wspd}
                                             km/h
                                         </div>
 
                                         <div className="">
                                             <img src="humidity.jpg" width="30" height="30" />
-                                            {test.humidity}
+                                            {test.humidity == null ? "N/A" : test.humidity}
                                         </div>
                                     </div>   
                                 )
