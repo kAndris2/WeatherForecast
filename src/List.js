@@ -3,7 +3,6 @@ import moment from 'moment';
 import './Weather.css';
 
 const Table = ({ weather,location }) => {
-    
     return ( 
         // <table id="tablePreview" classNameName="table table-hover table-striped">
         //     <thead>

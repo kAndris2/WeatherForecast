@@ -62,25 +62,28 @@ import Chart from './Chart';
         }
         
         return (
-          <div className="container">
-            <List 
-              weather={this.state.newData[this.state.activePage - 1]} 
-              location={this.state.weather.location.address}
-              perPage={this.state.perPage}
-              activePage={this.state.activePage}
-            />
-            <Pagination 
-              itemClass="page-item"
-              linkClass="page-link"
-              activePage={this.state.activePage}
-              itemsCountPerPage={this.state.perPage}
-              totalItemsCount={this.state.weather.location.values.length}
-              pageRangeDisplayed={5}
-              onChange={this.handlePageChange.bind(this)}
-            />
-            
-            <Chart></Chart>
-          </div>
+          <>
+            <div className="container">
+              <List 
+                weather={this.state.newData[this.state.activePage - 1]} 
+                location={this.state.weather.location.address}
+                perPage={this.state.perPage}
+                activePage={this.state.activePage}
+              />
+              <Pagination 
+                itemClass="page-item"
+                linkClass="page-link"
+                activePage={this.state.activePage}
+                itemsCountPerPage={this.state.perPage}
+                totalItemsCount={this.state.weather.location.values.length}
+                pageRangeDisplayed={5}
+                onChange={this.handlePageChange.bind(this)}
+              /> 
+            </div>
+            <div className="container-fluid">
+              <Chart weather={this.state.weather}></Chart>
+            </div>
+          </>
         );
         
       }
