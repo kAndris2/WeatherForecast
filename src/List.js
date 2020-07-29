@@ -1,12 +1,32 @@
 import React from 'react';
 import moment from 'moment';
-import './Weather.css';
+//import './Weather.css';
 
 const Table = ({ weather,location,data }) => {
     console.log(data);
 
-    function showWeatherIcon() {
-        
+
+    function setWeatherIcon(icon) {
+        if (icon.length == 1 && icon[0] == "clear") {
+            return (
+                <img src="sunny.jpg" width="100" height="100" />
+            );
+        }
+        else if (icon.length == 1 && icon[0] == "overcast") {
+            return (
+                <img src="cloudy.jpg" width="100" height="100" />
+            );
+        }
+        else if (icon.length == 1 && icon[0] == "partially cloudy") {
+            return (
+                <img src="sun-shower.jpg" width="100" height="100" />
+            );
+        }
+        else if (icon.length == 1 && icon[0] == "rain" || icon.length > 1 && icon.includes("rain")) {
+            return (
+                <img src="rainy.jpg" width="100" height="100"/>
+            );
+        }
     }
 
     return ( 
@@ -69,7 +89,9 @@ const Table = ({ weather,location,data }) => {
                         </td>
 
                         <td>
-
+                            <div>
+                                {setWeatherIcon(data.location.currentConditions.icon.split(','))}
+                            </div>
                         </td>
                     </tr>
                 </table>

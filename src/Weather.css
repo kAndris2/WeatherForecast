@@ -4,7 +4,7 @@ html *:before,
 html *:after { box-sizing: inherit; }a
 
 .icon {
-  position: relative;
+  position: absolute;
   display: inline-block;
   width: 12em;
   height: 10em;
