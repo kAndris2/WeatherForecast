@@ -7,22 +7,32 @@ const Table = ({ weather,location,data }) => {
 
 
     function setWeatherIcon(icon) {
-        if (icon.length === 1 && icon[0].toLowerCase() === "clear") {
+        const icons = [];
+        icon.forEach(item => {
+            if (item === "clear-day") {
+                icons.push("clear");
+            }
+            else {
+                icons.push(item.toLowerCase());
+            }
+        });
+
+        if (icons.length === 1 && icons[0] === "clear") {
             return (
                 <img alt="sun" src="sunny.jpg" width="100" height="100" />
             );
         }
-        else if (icon.length === 1 && icon[0].toLowerCase() === "overcast") {
+        else if (icons.length === 1 && icons[0] === "overcast") {
             return (
                 <img alt="cloud" src="cloudy.jpg" width="100" height="100" />
             );
         }
-        else if (icon.length === 1 && icon[0].toLowerCase() === "partially cloudy") {
+        else if (icons.length === 1 && icons[0] === "partially cloudy") {
             return (
                 <img alt="partial" src="sun-shower.jpg" width="100" height="100" />
             );
         }
-        else if ((icon.length === 1 && icon[0].toLowerCase() === "rain") || (icon.length > 1 && icon.includes("Rain"))) {
+        else if ((icons.length === 1 && icons[0] === "rain") || (icons.length > 1 && icons.includes("Rain"))) {
             return (
                 <img alt="rain" src="rainy.jpg" width="100" height="100"/>
             );
@@ -62,7 +72,7 @@ const Table = ({ weather,location,data }) => {
                         </div>
                         <div className="card-body p-0">
                             <p className="mb-0">
-                                {/* {setWeatherIcon(data.location.currentConditions.icon.split(','))} */}
+                                {setWeatherIcon(data.location.currentConditions.icon.split(','))}
                             </p>
                             <p className="card-title">
                                 Temperature:
