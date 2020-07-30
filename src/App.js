@@ -15,10 +15,31 @@ import Map from './Map';
           newData: [],
           perPage: 7,
           value:'',
-          v_loaded: false
+          //test:this.getStartPos(),
+          v_loaded: false,
+          coords: []
         };
         this.addValue = this.addValue.bind(this);
         this.updateInput = this.updateInput.bind(this);
+        
+      }
+
+      getStartPos(){
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            this.setState({coords:[position.coords.latitude,position.coords.longitude]})
+          });          
+          
+         // url = "http://api.geonames.org/extendedFindNearbyJSON?lat="++"&lng=20.3856502&username=burgonyapure";
+        } else { 
+          console.log("nah")
+        }
+        console.log(this.state.coords);
+      }
+
+      getCoords(position){
+        //this.state.coords = [position.coords.latitude,position.coords.longitude];
+        this.setState({coords:[position.coords.latitude,position.coords.longitude]});
       }
 
       getData(city){
@@ -28,7 +49,7 @@ import Map from './Map';
         'contentType=json&'+
         'unitGroup=metric&'+
         'locationMode=single&'+
-        'key=W7I3NYLYSXA2JVB4I7ZZ8UJ41&'+ //VGI4KGKVXS1W2461TTPDAZ1CK || X1T4HSVB1SFR2JDVHVUML7T5S || W7I3NYLYSXA2JVB4I7ZZ8UJ41
+        'key=VGI4KGKVXS1W2461TTPDAZ1CK&'+ //VGI4KGKVXS1W2461TTPDAZ1CK || X1T4HSVB1SFR2JDVHVUML7T5S || W7I3NYLYSXA2JVB4I7ZZ8UJ41
         'locations='+city+'%20';
         fetch(url)
         .then(res => res.json())
@@ -67,6 +88,7 @@ import Map from './Map';
 
       componentDidMount() {
         this.getData(this.state.city);
+        this.getStartPos();
       }
 
       handlePageChange(pageNumber) {
