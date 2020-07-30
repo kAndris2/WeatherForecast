@@ -115,7 +115,7 @@ import Map from './Map';
                       />  
                   </div>
                   <div className="col-sm-4">
-                    <Map pos={[this.state.weather.location.latitude,this.state.weather.location.longitude]}></Map>
+                    <Map pos={[this.state.weather.location.latitude,this.state.weather.location.longitude]} city={this.state.weather.location.address.split(",")[0]}></Map>
                   </div>
               </div>
               
