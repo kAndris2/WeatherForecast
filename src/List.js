@@ -39,7 +39,7 @@ const Table = ({ weather,location,data }) => {
         }
         else if (icons.length === 1 && icons[0] === "partially cloudy") {
             return (
-                <img alt="partial" src="sun-shower.jpg" width="100" height="100" />
+                <img alt="partial" src="partially-cloudy.jpg" width="100" height="100" />
             );
         }
         else if ((icons.length === 1 && icons[0] === "rain") || (icons.length > 1 && icons.includes("Rain"))) {
@@ -47,11 +47,20 @@ const Table = ({ weather,location,data }) => {
                 <img alt="rain" src="rainy.jpg" width="100" height="100"/>
             );
         }
-        else {
+        else if (icons.includes("rain") && icons.includes("overcast")) {
             return (
-                <img alt="no-data" src="no-data.png" width="100" height="100" />
+                <img alt="over-rain" src="over-rain.jpg" width="100" height="100" />
             );
         }
+        else if (icons.includes("clear") && icons.includes("rain")) {
+            return (
+                <img alt="sun-shower" src="sun-shower.jpg" width="100" height="100" />
+            );
+        }
+
+        return (
+            <img alt="no-data" src="no-data.png" width="100" height="100" />
+        );
     }
 
     return ( 
@@ -119,7 +128,7 @@ const Table = ({ weather,location,data }) => {
                             </div>
 
                             <div className="">
-                                {setWeatherIcon(test.conditions.split(','), false)}
+                                {setWeatherIcon(test.conditions.split(', '), false)}
                             </div>
 
                             <div className="">
