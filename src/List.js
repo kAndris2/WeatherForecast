@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 //import './Weather.css';
 
-const Table = ({ weather,location,data }) => {
+const Table = ({ weather,location,data, names }) => {
     
 
 
@@ -70,7 +70,7 @@ const Table = ({ weather,location,data }) => {
                     <h1 className="text-center" >{location}</h1>
                 </div>
             </div> */}
-        
+            
             <div className="row text-center"> 
                 <div className="col p-0">
                     <div className="card">

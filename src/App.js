@@ -15,15 +15,17 @@ import Map from './Map';
           newData: [],
           perPage: 7,
           value:'',
-          //test:this.getStartPos(),
+          //test:this.getStartCity(),
           v_loaded: false,
           coords: [],
+          got_coords: false,
           badCity: ""
         };
         this.addValue = this.addValue.bind(this);
         this.updateInput = this.updateInput.bind(this);
         this.getStartPos = this.getStartPos.bind(this);
         this.getCoords = this.getCoords.bind(this);
+        //this.state.city = this.getStartCity();
         
       }
 
@@ -36,16 +38,22 @@ import Map from './Map';
       }
 
       getCoords(position){
-        this.state.coords.push(position.coords.latitude,position.coords.longitude);
+        this.state.coords.push(position.coords.latitude);
+        this.state.coords.push(position.coords.longitude);
+        this.setState({got_coords:true});
       }
 
-      getStartCity(coords){
-        coords = this.state.coords;
-        let lat = coords[0];
-        let lon = coords[1];
-        let url = "http://api.geonames.org/extendedFindNearbyJSON?lat="+lat+"&lng="+lon+"&username=burgonyapure";
-
-
+      getStartCity(){
+        
+        const test = this.state.coords;
+        let lat = test[0];
+        let lon = test[1];
+        let url = "http://api.geonames.org/extendedFindNearbyJSON?lat="+lat+"&lng="+lon+"&username=kode";
+        fetch(url)
+        .then(result => result.json())
+        .then((data) => {
+          console.log(data);
+        })
       }
 
       getData(city){
@@ -104,7 +112,6 @@ import Map from './Map';
       componentDidMount() {
         this.getData(this.state.city);
         this.getStartPos();
-        console.log(this.state.coords);
       }
 
       handlePageChange(pageNumber) {
@@ -112,11 +119,16 @@ import Map from './Map';
       }
 
       render () {
+        if (this.state.got_coords){
+          this.getStartCity();
+          
+        }
+        
         if (!this.state.loaded && this.state.badCity.length >= 0) {
           return (
             <>
               <h1>"{this.state.badCity}" is not found!</h1>
-              {this.state.badCity.toLowerCase() == "kutya" ? <img src="dog.gif" /> : <img src="wtf.jpg" />}
+              {this.state.badCity.toLowerCase() === "kutya" ? <img src="dog.gif" /> : <img src="wtf.jpg" />}
             </>
           );
         }
@@ -175,8 +187,10 @@ import Map from './Map';
               
             </div>
 
-            <br/><table>
-              <h5>Meaning of icons:</h5>
+            <br/>
+            <h5>Meaning of icons:</h5>
+            <table>
+              <tbody>
               <tr>
                 <td>Temperature: <img alt="temp" src="temp.jpg" width="30" height="30" /></td>
                 <td>Humidity: <img alt="humidity" src="humidity.jpg" width="30" height="30" /></td>
@@ -192,6 +206,7 @@ import Map from './Map';
               <tr>
                 <td>Wind speed: <img alt="wind" src="wind.jpg" width="30" height="30" /></td>
               </tr>
+              </tbody>
             </table>
           </>
         );
