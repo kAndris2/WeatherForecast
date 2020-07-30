@@ -80,6 +80,11 @@ const Table = ({ weather,location,data }) => {
                                     {data.location.currentConditions.humidity}
                                     %
                             </p>
+                            <p>
+                                Precip:<img alt="precip" src="precip.jpg" width="30" height="30" />
+                                    {data.location.currentConditions.precip}
+                                    mm
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -112,6 +117,19 @@ const Table = ({ weather,location,data }) => {
                             <div className="">
                                 <img alt="humidity" src="humidity.jpg" width="30" height="30" />
                                 {test.humidity}
+                                %
+                            </div>
+
+                            <div>
+                                <img alt="cor" src="cor.jpg" width="30" height="30" />
+                                {test.pop}
+                                %
+                            </div>
+
+                            <div>
+                                <img alt="precip" src="precip.jpg" width="30" height="30" />
+                                {test.precip}
+                                mm
                             </div>
                         </div>   
                     )
