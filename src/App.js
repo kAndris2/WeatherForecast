@@ -22,19 +22,30 @@ import Map from './Map';
         };
         this.addValue = this.addValue.bind(this);
         this.updateInput = this.updateInput.bind(this);
+        this.getStartPos = this.getStartPos.bind(this);
+        this.getCoords = this.getCoords.bind(this);
         
       }
 
       getStartPos(){
         if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            this.setState({coords:[position.coords.latitude,position.coords.longitude]})
-          });          
-          
-         // url = "http://api.geonames.org/extendedFindNearbyJSON?lat="++"&lng=20.3856502&username=burgonyapure";
+          navigator.geolocation.getCurrentPosition(this.getCoords) 
         } else { 
           console.log("nah")
         }
+      }
+
+      getCoords(position){
+        this.state.coords.push(position.coords.latitude,position.coords.longitude);
+      }
+
+      getStartCity(coords){
+        coords = this.state.coords;
+        let lat = coords[0];
+        let lon = coords[1];
+        let url = "http://api.geonames.org/extendedFindNearbyJSON?lat="+lat+"&lng="+lon+"&username=burgonyapure";
+
+        
       }
 
       getData(city){
@@ -93,7 +104,8 @@ import Map from './Map';
 
       componentDidMount() {
         this.getData(this.state.city);
-        //this.getStartPos();
+        this.getStartPos();
+        console.log(this.state.coords);
       }
 
       handlePageChange(pageNumber) {
@@ -101,7 +113,6 @@ import Map from './Map';
       }
 
       render () {
-        console.log(this.state)
         if (!this.state.loaded && this.state.badCity.length >= 0) {
           return (
             <>
@@ -111,7 +122,7 @@ import Map from './Map';
           );
         }
         
-        else if(!this.state.loaded || !this.state.newData[0]){ //|| this.state.v_loaded
+        else if(!this.state.loaded || !this.state.newData[0] || this.state.v_loaded){ //|| this.state.v_loaded
           return(
             <div className="container text-center align-middle">
               <video playsInline="" muted="" autoPlay={true} loop={true} data-silent="true" src="https://cdn.dribbble.com/users/107759/screenshots/2436386/copper-loader.gif?vid=1"></video>
@@ -119,7 +130,7 @@ import Map from './Map';
             </div>
           );
         }
-        console.log(this.state.newData)
+        
         return (
           <>
             <div className="container-fluid">
