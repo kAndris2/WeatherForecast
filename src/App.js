@@ -45,7 +45,7 @@ import Map from './Map';
         let lon = coords[1];
         let url = "http://api.geonames.org/extendedFindNearbyJSON?lat="+lat+"&lng="+lon+"&username=burgonyapure";
 
-        
+
       }
 
       getData(city){
@@ -62,16 +62,15 @@ import Map from './Map';
         .then((data) => {
           try {
             if (data.errorCode === 999 || city === "kutya") {
-              console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
               throw "City is not found!";
             }
-            else{
+            else {
             this.setState({ weather: data , loaded: true, v_loaded:false})
             this.paginate();
             }
           }
           catch (err) {
-            this.setState({badCity: city, city: ""})
+            this.setState({badCity: city, city: "", loaded: false})
           }
         })
         .catch()
