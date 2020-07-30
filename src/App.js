@@ -90,6 +90,9 @@ import Chart from './Chart';
                 <input className="form-control" placeholder="Enter a city" type="text" onChange={this.updateInput} />
                 <input className="btn btn-primary" type="submit" value="submit"/>
               </div>
+              <div className="form-group mx-sm-3 mb-2">
+                <h2 className="text-center" >{this.state.weather.location.address}</h2>
+              </div>
             </form>
               <List 
                 weather={this.state.newData[this.state.activePage - 1]} 
