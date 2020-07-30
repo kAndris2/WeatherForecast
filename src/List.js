@@ -52,7 +52,7 @@ const Table = ({ weather,location,data }) => {
                 <img alt="over-rain" src="over-rain.jpg" width="100" height="100" />
             );
         }
-        else if (icons.includes("clear") && icons.includes("rain")) {
+        else if (icons.includes("clear") && icons.includes("rain") || icons.includes("rain") && icons.includes("partially cloudy")) {
             return (
                 <img alt="sun-shower" src="sun-shower.jpg" width="100" height="100" />
             );
