@@ -12,16 +12,13 @@ import Chart from './Chart';
           weather: [],
           activePage: 1,
           newData: [],
-          offset: 0,
           perPage: 7,
-          value:''
+          value:'',
+          v_loaded: false
         };
         this.addValue = this.addValue.bind(this);
         this.updateInput = this.updateInput.bind(this);
       }
-      // state = {
-        
-      // }
 
       getData(city){
         let url = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?'+
@@ -35,7 +32,7 @@ import Chart from './Chart';
         fetch(url)
         .then(res => res.json())
         .then((data) => {
-          this.setState({ weather: data , loaded: true});
+          this.setState({ weather: data , loaded: true, v_loaded:false});
           this.paginate();
         })
         .catch()
@@ -54,14 +51,16 @@ import Chart from './Chart';
 
       addValue(evt){
         evt.preventDefault();
-        if (this.state.value !=undefined){
+        if (this.state.value !== undefined){
           let new_city = this.state.value;
           this.getData(new_city);
+          this.setState({v_loaded:true})
         }
       }
     
       updateInput(evt){
-        this.state={value: evt.target.value};   
+        this.setState({value: evt.target.value, v_loaded:false});   
+        
       }
 
       componentDidMount() {
@@ -73,7 +72,8 @@ import Chart from './Chart';
       }
 
       render () {
-        if(!this.state.loaded || !this.state.newData[0]){
+        
+        if(!this.state.loaded || !this.state.newData[0] || this.state.v_loaded){ //|| this.state.v_loaded
           return(
             <div className="container text-center align-middle">
               <video playsInline="" muted="" autoPlay={true} loop={true} data-silent="true" src="https://cdn.dribbble.com/users/107759/screenshots/2436386/copper-loader.gif?vid=1"></video>
@@ -104,7 +104,7 @@ import Chart from './Chart';
                 totalItemsCount={this.state.weather.location.values.length}
                 pageRangeDisplayed={5}
                 onChange={this.handlePageChange.bind(this)}
-              /> 
+              />  
             </div>
             <div className="container-fluid">
               <Chart weather={this.state.weather}></Chart>

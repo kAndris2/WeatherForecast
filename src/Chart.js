@@ -74,8 +74,9 @@ class Chart extends Component {
         let avg = this.getAverageData();
         
         const options = {
+            zoomEnabled:true,
             animationEnabled: true,
-            theme: "dark",
+            theme: "light2",
 			title:{
 				text: "Weather Temperature Forecast"
 			},
@@ -84,7 +85,7 @@ class Chart extends Component {
                 crosshair: {
                     enabled: true
                 },
-				valueFormatString: "DDD HH"
+				valueFormatString: "DDD HH:mm"
 			},
 			axisY: {
                 includeZero: false,

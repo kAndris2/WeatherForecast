@@ -3,7 +3,7 @@ import moment from 'moment';
 //import './Weather.css';
 
 const Table = ({ weather,location,data }) => {
-    console.log(data);
+    
 
 
     function setWeatherIcon(icon) {
@@ -29,7 +29,7 @@ const Table = ({ weather,location,data }) => {
         }
         else {
             return (
-                <img src="no-data.png" width="100" height="100" />
+                <img alt="no-data" src="no-data.png" width="100" height="100" />
             );
         }
     }
@@ -68,12 +68,12 @@ const Table = ({ weather,location,data }) => {
                             </div>
                             <div className="col">
                                 <img alt="set" src="sunset.jpg" width="50" height="50" />
-                                {moment(data.location.currentConditions.sunset).format("h:mm")}
+                                {moment(data.location.currentConditions.sunset).format("HH:mm")}
                             </div>
                         </div>
                         <div className="card-body p-0">
                             <p className="mb-0">
-                                {setWeatherIcon(data.location.currentConditions.icon.split(','))}
+                                {/* {setWeatherIcon(data.location.currentConditions.icon.split(','))} */}
                             </p>
                             <p className="card-title">
                                 Temperature:
