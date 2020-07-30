@@ -85,9 +85,11 @@ import Chart from './Chart';
         return (
           <>
             <div className="container">
-            <form onSubmit={this.addValue}>
-              <input type="text" onChange={this.updateInput} /><br/><br/>
-              <input type="submit" value="submit"/>
+            <form className="form-inline" onSubmit={this.addValue}>
+              <div className="form-group">
+                <input className="form-control" placeholder="Enter a city" type="text" onChange={this.updateInput} />
+                <input className="btn btn-primary" type="submit" value="submit"/>
+              </div>
             </form>
               <List 
                 weather={this.state.newData[this.state.activePage - 1]} 

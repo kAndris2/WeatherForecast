@@ -35,40 +35,29 @@ const Table = ({ weather,location,data }) => {
     }
 
     return ( 
-        // <table id="tablePreview" classNameNameName="table table-hover table-striped">
-        //     <thead>
-        //         <tr>
-        //             {headers.map(header => 
-        //                <th>{header}</th>  
-        //             )}
-        //         </tr>
-        //     </thead>
-        //     <tbody>        
-        //         {weather.location.values.map(hour => 
-        //             <tr> 
-        //                 <td>{moment(hour.datetimeStr).format("YYYY.MM.DD H:mm")}</td>
-        //                 <td></td>
-        //             </tr>
-        //         )}
-        //     </tbody>
-        // </table>
         <>
-            <h1 className="text-center" >{location}</h1>
+            <div className="row mb-3">
+                <div className="col-sm">
+                    <h1 className="text-center" >{location}</h1>
+                </div>
+            </div>
         
             <div className="row text-center"> 
                 <div className="col p-0">
                     <div className="card">
-                        <div className="row card-header p-0">
-                            <div className="col">
-                                <img alt="rise" src="sunrise.jpg" width="50" height="50" />
-                                {moment(data.location.currentConditions.sunrise).format("h:mm")}
-                            </div>
-                            <div className="col">
-                                <h4>Current conditions: {moment(data.location.currentConditions.datetime).format("YYYY.MM.DD H:mm")}</h4>
-                            </div>
-                            <div className="col">
-                                <img alt="set" src="sunset.jpg" width="50" height="50" />
-                                {moment(data.location.currentConditions.sunset).format("HH:mm")}
+                        <div className="card-header p-0">
+                            <div className="row">
+                                <div className="col p-0">
+                                    <img alt="rise" src="sunrise.jpg" width="50" height="50" />
+                                    {moment(data.location.currentConditions.sunrise).format("h:mm")}
+                                </div>
+                                <div className="col p-0">
+                                    <h4>Current conditions: {moment(data.location.currentConditions.datetime).format("YYYY.MM.DD H:mm")}</h4>
+                                </div>
+                                <div className="col p-0">
+                                    <img alt="set" src="sunset.jpg" width="50" height="50" />
+                                    {moment(data.location.currentConditions.sunset).format("HH:mm")}
+                                </div>
                             </div>
                         </div>
                         <div className="card-body p-0">
