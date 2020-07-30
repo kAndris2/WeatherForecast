@@ -9,13 +9,14 @@ import Map from './Map';
         super(props);
         this.state = {
           loaded: false,
-          city: "Eger",
+          city: "kutya",
           weather: [],
           activePage: 1,
           newData: [],
           perPage: 7,
           value:'',
-          v_loaded: false
+          v_loaded: false,
+          badCity: ""
         };
         this.addValue = this.addValue.bind(this);
         this.updateInput = this.updateInput.bind(this);
@@ -33,9 +34,16 @@ import Map from './Map';
         fetch(url)
         .then(res => res.json())
         .then((data) => {
+          try {
+            if (data.errorCode != undefined && data.errorCode == 999) {
+              throw "City is not found!";
+            }
           this.setState({ weather: data , loaded: true, v_loaded:false})
-          
           this.paginate();
+          }
+          catch (err) {
+            this.setState({badCity: city, loaded: true})
+          }
         })
         .catch()
       }
@@ -74,6 +82,14 @@ import Map from './Map';
       }
 
       render () {
+        if (this.state.loaded && this.state.badCity.length >= 0) {
+          return (
+            <>
+              <h1>"{this.state.badCity}" is not found!</h1>
+              {this.state.badCity.toLowerCase() == "kutya" ? <img src="dog.gif" /> : <img src="wtf.jpg" />}
+            </>
+          );
+        }
         
         if(!this.state.loaded || !this.state.newData[0] || this.state.v_loaded){ //|| this.state.v_loaded
           return(
