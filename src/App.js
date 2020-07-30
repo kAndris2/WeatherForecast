@@ -50,7 +50,8 @@ import Map from './Map';
         .then(res => res.json())
         .then((data) => {
           try {
-            if (data.errorCode != undefined && data.errorCode == 999) {
+            if (data.errorCode === 999 || city === "kutya") {
+              console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
               throw "City is not found!";
             }
             else{
@@ -59,7 +60,7 @@ import Map from './Map';
             }
           }
           catch (err) {
-            this.setState({badCity: city, loaded: true})
+            this.setState({badCity: city, city: ""})
           }
         })
         .catch()
@@ -100,7 +101,8 @@ import Map from './Map';
       }
 
       render () {
-        if (this.state.loaded && this.state.badCity.length >= 0) {
+        console.log(this.state)
+        if (!this.state.loaded && this.state.badCity.length >= 0) {
           return (
             <>
               <h1>"{this.state.badCity}" is not found!</h1>
@@ -109,7 +111,7 @@ import Map from './Map';
           );
         }
         
-        if(!this.state.loaded || !this.state.newData[0] || this.state.v_loaded){ //|| this.state.v_loaded
+        else if(!this.state.loaded || !this.state.newData[0]){ //|| this.state.v_loaded
           return(
             <div className="container text-center align-middle">
               <video playsInline="" muted="" autoPlay={true} loop={true} data-silent="true" src="https://cdn.dribbble.com/users/107759/screenshots/2436386/copper-loader.gif?vid=1"></video>
