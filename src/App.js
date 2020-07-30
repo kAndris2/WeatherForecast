@@ -9,7 +9,7 @@ import Map from './Map';
         super(props);
         this.state = {
           loaded: false,
-          city: "kutya",
+          city: "Eger",
           weather: [],
           activePage: 1,
           newData: [],
@@ -35,12 +35,6 @@ import Map from './Map';
         } else { 
           console.log("nah")
         }
-        console.log(this.state.coords);
-      }
-
-      getCoords(position){
-        //this.state.coords = [position.coords.latitude,position.coords.longitude];
-        this.setState({coords:[position.coords.latitude,position.coords.longitude]});
       }
 
       getData(city){
@@ -59,8 +53,10 @@ import Map from './Map';
             if (data.errorCode != undefined && data.errorCode == 999) {
               throw "City is not found!";
             }
-          this.setState({ weather: data , loaded: true, v_loaded:false})
-          this.paginate();
+            else{
+            this.setState({ weather: data , loaded: true, v_loaded:false})
+            this.paginate();
+            }
           }
           catch (err) {
             this.setState({badCity: city, loaded: true})
@@ -96,7 +92,7 @@ import Map from './Map';
 
       componentDidMount() {
         this.getData(this.state.city);
-        this.getStartPos();
+        //this.getStartPos();
       }
 
       handlePageChange(pageNumber) {
