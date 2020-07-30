@@ -123,6 +123,7 @@ const Table = ({ weather,location,data }) => {
                             <div className="">
                                 <img alt="humidity" src="humidity.jpg" width="30" height="30" />
                                 {test.humidity}
+                                %
                             </div>
                         </div>   
                     )
