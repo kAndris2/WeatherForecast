@@ -6,7 +6,17 @@ const Table = ({ weather,location,data }) => {
     
 
 
-    function setWeatherIcon(icon) {
+    function setWeatherIcon(icon, mode) {
+        if (mode) {
+            try {
+
+                icon = data.location.currentConditions.icon.split(',');
+            }
+            catch (err) {
+                icon = [];
+            }
+        }
+
         const icons = [];
         icon.forEach(item => {
             if (item === "clear-day") {
@@ -72,27 +82,27 @@ const Table = ({ weather,location,data }) => {
                         </div>
                         <div className="card-body p-0">
                             <p className="mb-0">
-                                {setWeatherIcon(data.location.currentConditions.icon.split(','))}
+                                {setWeatherIcon([], true)}
                             </p>
                             <p className="card-title">
                                 Temperature:
                                 <img alt="temp" src="temp.jpg" width="30" height="30" />
-                                    {data.location.currentConditions.temp}
+                                    {data.location.currentConditions.temp == null ? "N/A" : data.location.currentConditions.temp}
                                     °C
                             </p> 
                             <p>
                                 Wind speed:<img alt="wind" src="wind.jpg" width="30" height="30" />
-                                    {data.location.currentConditions.wspd}
+                                    {data.location.currentConditions.wspd == null ? "N/A" : data.location.currentConditions.wspd}
                                     km/h
                             </p>
                             <p>
                                 Humidity:<img alt="humidity" src="humidity.jpg" width="30" height="30" />
-                                    {data.location.currentConditions.humidity}
+                                    {data.location.currentConditions.humidity == null ? "N/A" : data.location.currentConditions.humidity}
                                     %
                             </p>
                             <p>
                                 Precip:<img alt="precip" src="precip.jpg" width="30" height="30" />
-                                    {data.location.currentConditions.precip}
+                                    {data.location.currentConditions.precip == null ? "N/A" : data.location.currentConditions.precip}
                                     mm
                             </p>
                         </div>
@@ -109,36 +119,36 @@ const Table = ({ weather,location,data }) => {
                             </div>
 
                             <div className="">
-                                {setWeatherIcon(test.conditions.split(','))}
+                                {setWeatherIcon(test.conditions.split(','), false)}
                             </div>
 
                             <div className="">
                                 <img alt="temp" src="temp.jpg" width="30" height="30" />
-                                {test.temp}
+                                {test.temp == null ? "N/A" : test.temp}
                                 °C
                             </div>
 
                             <div className="">
                                 <img alt="wind" src="wind.jpg" width="30" height="30" />
-                                {test.wspd}
+                                {test.wspd == null ? "N/A" : test.wspd}
                                 km/h
                             </div>
 
                             <div className="">
                                 <img alt="humidity" src="humidity.jpg" width="30" height="30" />
-                                {test.humidity}
+                                {test.humidity == null ? "N/A" : test.humidity}
                                 %
                             </div>
 
                             <div>
                                 <img alt="cor" src="cor.jpg" width="30" height="30" />
-                                {test.pop}
+                                {test.pop == null ? "N/A" : test.pop}
                                 %
                             </div>
 
                             <div>
                                 <img alt="precip" src="precip.jpg" width="30" height="30" />
-                                {test.precip}
+                                {test.precip == null ? "N/A" : test.precip}
                                 mm
                             </div>
                         </div>   
