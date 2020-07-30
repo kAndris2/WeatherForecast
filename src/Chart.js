@@ -78,7 +78,7 @@ class Chart extends Component {
             animationEnabled: true,
             theme: "light2",
 			title:{
-				text: "Weather Temperature Forecast"
+				text: "Hourly Temperature Forecast"
 			},
 			axisX: {
                 includeZero: false,

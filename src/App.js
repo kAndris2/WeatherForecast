@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import List from './List';
 import Pagination from "react-js-pagination";
 import Chart from './Chart';
+import Map from './Map';
 
     class App extends Component {
       constructor(props){
@@ -84,35 +85,47 @@ import Chart from './Chart';
         
         return (
           <>
-            <div className="container">
-            <form className="form-inline" onSubmit={this.addValue}>
-              <div className="form-group">
-                <input className="form-control" placeholder="Enter a city" type="text" onChange={this.updateInput} />
-                <input className="btn btn-primary" type="submit" value="submit"/>
+            <div className="container-fluid">
+              <div className="row">
+                  <div className="col-sm-8">
+                    <form className="form-inline" onSubmit={this.addValue}>
+                      <div className="form-group">
+                        <input className="form-control" placeholder="Enter a city" type="text" onChange={this.updateInput} />
+                        <input className="btn btn-primary" type="submit" value="submit"/>
+                      </div>
+                      <div className="form-group mx-sm-3 mb-2">
+                        <h2 className="text-center" >{this.state.weather.location.address}</h2>
+                      </div>
+                    </form>
+                      <List 
+                        weather={this.state.newData[this.state.activePage - 1]} 
+                        location={this.state.weather.location.address}
+                        data={this.state.weather}
+                        perPage={this.state.perPage}
+                        activePage={this.state.activePage}
+                      />
+                      <Pagination 
+                        itemClass="page-item"
+                        linkClass="page-link"
+                        activePage={this.state.activePage}
+                        itemsCountPerPage={this.state.perPage}
+                        totalItemsCount={this.state.weather.location.values.length}
+                        pageRangeDisplayed={5}
+                        onChange={this.handlePageChange.bind(this)}
+                      />  
+                  </div>
+                  <div className="col-sm-4">
+                    <Map pos={[this.state.weather.location.latitude,this.state.weather.location.longitude]}></Map>
+                  </div>
               </div>
-              <div className="form-group mx-sm-3 mb-2">
-                <h2 className="text-center" >{this.state.weather.location.address}</h2>
-              </div>
-            </form>
-              <List 
-                weather={this.state.newData[this.state.activePage - 1]} 
-                location={this.state.weather.location.address}
-                data={this.state.weather}
-                perPage={this.state.perPage}
-                activePage={this.state.activePage}
-              />
-              <Pagination 
-                itemClass="page-item"
-                linkClass="page-link"
-                activePage={this.state.activePage}
-                itemsCountPerPage={this.state.perPage}
-                totalItemsCount={this.state.weather.location.values.length}
-                pageRangeDisplayed={5}
-                onChange={this.handlePageChange.bind(this)}
-              />  
+              
+            
+              
+              
             </div>
             <div className="container-fluid">
               <Chart weather={this.state.weather}></Chart>
+              
             </div>
           </>
         );
