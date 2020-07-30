@@ -127,6 +127,25 @@ import Map from './Map';
               <Chart weather={this.state.weather}></Chart>
               
             </div>
+
+            <br/><table>
+              <h5>Meaning of icons:</h5>
+              <tr>
+                <td>Temperature: <img alt="temp" src="temp.jpg" width="30" height="30" /></td>
+                <td>Humidity: <img alt="humidity" src="humidity.jpg" width="30" height="30" /></td>
+              </tr>
+              <tr>
+                <td>Chance of rain: <img alt="cor" src="cor.jpg" width="30" height="30" /></td>
+                <td>Precip: <img alt="precip" src="precip.jpg" width="30" height="30" /></td>
+              </tr>
+              <tr>
+                <td>Sunrise: <img alt="sunrise" src="sunrise.jpg" width="30" height="30" /></td>
+                <td>Sunset: <img alt="sunset" src="sunset.jpg" width="30" height="30" /></td>
+              </tr>
+              <tr>
+                <td>Wind speed: <img alt="wind" src="wind.jpg" width="30" height="30" /></td>
+              </tr>
+            </table>
           </>
         );
         
