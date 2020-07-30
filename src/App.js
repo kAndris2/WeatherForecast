@@ -36,14 +36,15 @@ import Map from './Map';
         .then((data) => {
           try {
             if (data.errorCode === 999 || city === "kutya") {
-              console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
               throw "City is not found!";
             }
-          this.setState({ weather: data , loaded: true, v_loaded:false})
-          this.paginate();
+            else {
+            this.setState({ weather: data , loaded: true, v_loaded:false})
+            this.paginate();
+            }
           }
           catch (err) {
-            this.setState({badCity: city, city: ""})
+            this.setState({badCity: city, city: "", loaded: false})
           }
         })
         .catch()
