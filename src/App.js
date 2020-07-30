@@ -9,7 +9,7 @@ import Map from './Map';
         super(props);
         this.state = {
           loaded: false,
-          city: "kutya",
+          city: "Eger",
           weather: [],
           activePage: 1,
           newData: [],
@@ -29,20 +29,21 @@ import Map from './Map';
         'contentType=json&'+
         'unitGroup=metric&'+
         'locationMode=single&'+
-        'key=W7I3NYLYSXA2JVB4I7ZZ8UJ41&'+ //VGI4KGKVXS1W2461TTPDAZ1CK || X1T4HSVB1SFR2JDVHVUML7T5S || W7I3NYLYSXA2JVB4I7ZZ8UJ41
+        'key=VGI4KGKVXS1W2461TTPDAZ1CK&'+ //W7I3NYLYSXA2JVB4I7ZZ8UJ41&' || X1T4HSVB1SFR2JDVHVUML7T5S || W7I3NYLYSXA2JVB4I7ZZ8UJ41
         'locations='+city+'%20';
         fetch(url)
         .then(res => res.json())
         .then((data) => {
           try {
-            if (data.errorCode != undefined && data.errorCode == 999) {
+            if (data.errorCode === 999 || city === "kutya") {
+              console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
               throw "City is not found!";
             }
           this.setState({ weather: data , loaded: true, v_loaded:false})
           this.paginate();
           }
           catch (err) {
-            this.setState({badCity: city, loaded: true})
+            this.setState({badCity: city, city: ""})
           }
         })
         .catch()
@@ -82,7 +83,8 @@ import Map from './Map';
       }
 
       render () {
-        if (this.state.loaded && this.state.badCity.length >= 0) {
+        console.log(this.state)
+        if (!this.state.loaded && this.state.badCity.length >= 0) {
           return (
             <>
               <h1>"{this.state.badCity}" is not found!</h1>
@@ -91,7 +93,7 @@ import Map from './Map';
           );
         }
         
-        if(!this.state.loaded || !this.state.newData[0] || this.state.v_loaded){ //|| this.state.v_loaded
+        else if(!this.state.loaded || !this.state.newData[0]){ //|| this.state.v_loaded
           return(
             <div className="container text-center align-middle">
               <video playsInline="" muted="" autoPlay={true} loop={true} data-silent="true" src="https://cdn.dribbble.com/users/107759/screenshots/2436386/copper-loader.gif?vid=1"></video>
