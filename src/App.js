@@ -33,7 +33,8 @@ import Map from './Map';
         fetch(url)
         .then(res => res.json())
         .then((data) => {
-          this.setState({ weather: data , loaded: true, v_loaded:false});
+          this.setState({ weather: data , loaded: true, v_loaded:false})
+          
           this.paginate();
         })
         .catch()
@@ -41,7 +42,7 @@ import Map from './Map';
 
       paginate(){
         const arr = this.state.weather.location.values;
-
+        this.setState({newData:[]});
         for (let index = 0; index < arr.length; index += this.state.perPage) 
         {
           this.state.newData.push(arr.slice(index, index + this.state.perPage))
@@ -82,7 +83,7 @@ import Map from './Map';
             </div>
           );
         }
-        
+        console.log(this.state.newData)
         return (
           <>
             <div className="container-fluid">
