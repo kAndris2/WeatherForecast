@@ -36,11 +36,11 @@ const Table = ({ weather,location,data }) => {
 
     return ( 
         <>
-            <div className="row mb-3">
+            {/* <div className="row mb-3">
                 <div className="col-sm">
                     <h1 className="text-center" >{location}</h1>
                 </div>
-            </div>
+            </div> */}
         
             <div className="row text-center"> 
                 <div className="col p-0">
