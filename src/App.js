@@ -68,17 +68,12 @@ import Map from './Map';
         fetch(url)
         .then(res => res.json())
         .then((data) => {
-          try {
-            if (data.errorCode === 999 || city === "kutya") {
-              throw "City is not found!";
-            }
-            else {
-            this.setState({ weather: data , loaded: true, v_loaded:false})
-            this.paginate();
-            }
+          if (city === "kutya" || data.errorCode === 999) {
+            this.setState({badCity: city, loaded: false, v_loaded : true})
           }
-          catch (err) {
-            this.setState({badCity: city, city: "", loaded: false})
+          else {
+          this.setState({ weather: data , loaded: true, v_loaded:false})
+          this.paginate();
           }
         })
         .catch()
@@ -99,13 +94,13 @@ import Map from './Map';
         evt.preventDefault();
         if (this.state.value !== undefined){
           let new_city = this.state.value;
+          this.setState({loaded:false, v_loaded:true})
           this.getData(new_city);
-          this.setState({v_loaded:true})
         }
       }
     
       updateInput(evt){
-        this.setState({value: evt.target.value, v_loaded:false});   
+        this.setState({value: evt.target.value});//, v_loaded:false});   
         
       }
 
@@ -124,16 +119,15 @@ import Map from './Map';
           
         }
         
-        if (!this.state.loaded && this.state.badCity.length >= 0) {
+        if (!this.state.loaded && this.state.v_loaded && this.state.badCity.length >= 1) {
           return (
             <>
-              <h1>"{this.state.badCity}" is not found!</h1>
+              {this.state.badCity.toLowerCase() === "kutya" ? <h1>Here is the dog!</h1> : <h1>"{this.state.badCity}" is not found!</h1>}
               {this.state.badCity.toLowerCase() === "kutya" ? <img src="dog.gif" /> : <img src="wtf.jpg" />}
             </>
           );
         }
-        
-        else if(!this.state.loaded || !this.state.newData[0] || this.state.v_loaded){ //|| this.state.v_loaded
+        else if(!this.state.loaded && this.state.v_loaded || !this.state.newData[0]) {
           return(
             <div className="container text-center align-middle">
               <video playsInline="" muted="" autoPlay={true} loop={true} data-silent="true" src="https://cdn.dribbble.com/users/107759/screenshots/2436386/copper-loader.gif?vid=1"></video>
