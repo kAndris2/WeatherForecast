@@ -63,7 +63,7 @@ import Map from './Map';
         'contentType=json&'+
         'unitGroup=metric&'+
         'locationMode=single&'+
-        'key=VGI4KGKVXS1W2461TTPDAZ1CK&'+ //VGI4KGKVXS1W2461TTPDAZ1CK || X1T4HSVB1SFR2JDVHVUML7T5S || W7I3NYLYSXA2JVB4I7ZZ8UJ41
+        'key=X1T4HSVB1SFR2JDVHVUML7T5S&' + //VGI4KGKVXS1W2461TTPDAZ1CK& //VGI4KGKVXS1W2461TTPDAZ1CK || W7I3NYLYSXA2JVB4I7ZZ8UJ41
         'locations='+city+'%20';
         fetch(url)
         .then(res => res.json())
